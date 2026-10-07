@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BreathCare - Kesehatan Paru-Paru</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f9fb;
+            color: #1e293b;
+            line-height: 1.7;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 20px 8%;
+
+            background: rgba(5, 35, 45, 0.80);
+            backdrop-filter: blur(12px);
+        }
+
+        .logo {
+            color: white;
+            font-size: 25px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #35d5d1;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #35d5d1;
+        }
+
+
+        /* ================= HERO ================= */
+
+        .hero {
+
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+
+            padding: 100px 8%;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(2, 35, 45, 0.94),
+                    rgba(2, 35, 45, 0.55),
+                    rgba(2, 35, 45, 0.25)
+                ),
+
+                url("https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=1800&q=90");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            max-width: 750px;
+            animation: muncul 1.2s ease;
+        }
+
+        @keyframes muncul {
+
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        .tag {
+            display: inline-block;
+
+            padding: 8px 18px;
+
+            border: 1px solid #35d5d1;
+            border-radius: 30px;
+
+            color: #35d5d1;
+
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 65px;
+            line-height: 1.05;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: #35d5d1;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 650px;
+            color: #e2f3f4;
+            margin-bottom: 35px;
+        }
+
+        .btn {
+
+            display: inline-block;
+
+            padding: 14px 28px;
+
+            background: #22c7c5;
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 30px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #159a9a;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(34,199,197,0.3);
+        }
+
+
+        /* ================= STATISTIK ================= */
+
+        .stats {
+
+            width: 85%;
+            max-width: 1000px;
+
+            margin: -60px auto 70px;
+
+            position: relative;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            background: white;
+
+            border-radius: 20px;
+
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+
+            overflow: hidden;
+        }
+
+        .stat {
+            padding: 30px;
+            text-align: center;
+
+            border-right: 1px solid #e5e7eb;
+        }
+
+        .stat:last-child {
+            border-right: none;
+        }
+
+        .stat h2 {
+            color: #0b8c91;
+            font-size: 32px;
+        }
+
+        .stat p {
+            color: #64748b;
+        }
+
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+
+            width: 85%;
+            max-width: 1100px;
+
+            margin: 80px auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 38px;
+            color: #075e68;
+        }
+
+        .section-title p {
+            color: #64748b;
+            margin-top: 8px;
+        }
+
+
+        /* ================= ARTIKEL ================= */
+
+        .article {
+
+            background: white;
+
+            padding: 45px;
+
+            border-radius: 22px;
+
+            box-shadow: 0 10px 35px rgba(0,0,0,0.07);
+        }
+
+        .article h2 {
+            color: #087f89;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        .article h3 {
+            color: #087f89;
+            font-size: 22px;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        .article p {
+            text-align: justify;
+            margin-bottom: 15px;
+            color: #475569;
+        }
+
+
+        /* ================= CARDS ================= */
+
+        .cards {
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 25px;
+        }
+
+        .card {
+
+            background: white;
+
+            padding: 35px 25px;
+
+            border-radius: 20px;
+
+            text-align: center;
+
+            box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+
+            transition: 0.35s;
+        }
+
+        .card:hover {
+
+            transform: translateY(-10px);
+
+            box-shadow: 0 20px 40px rgba(0,0,0,0.13);
+        }
+
+        .card-icon {
+
+            width: 75px;
+            height: 75px;
+
+            margin: auto auto 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #e0f7f6;
+
+            font-size: 35px;
+        }
+
+        .card h3 {
+
+            color: #087f89;
+
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #64748b;
+        }
+
+
+        /* ================= TIPS ================= */
+
+        .tips {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 30px;
+
+            align-items: center;
+        }
+
+        .tips-image {
+
+            min-height: 400px;
+
+            border-radius: 25px;
+
+            background:
+
+                linear-gradient(
+                    rgba(0,80,90,0.2),
+                    rgba(0,80,90,0.2)
+                ),
+
+                url("https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=1000&q=85");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .tips-content {
+
+            background: #064f59;
+
+            color: white;
+
+            padding: 40px;
+
+            border-radius: 25px;
+        }
+
+        .tips-content h2 {
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        .tips-content ul {
+            list-style: none;
+        }
+
+        .tips-content li {
+
+            padding: 12px 0;
+
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .tips-content li::before {
+
+            content: "✓";
+
+            color: #4de0d8;
+
+            font-weight: bold;
+
+            margin-right: 12px;
+        }
+
+
+        /* ================= WARNING ================= */
+
+        .warning {
+
+            padding: 25px;
+
+            background: #fff7df;
+
+            border-left: 6px solid #e5ae00;
+
+            border-radius: 12px;
+
+            margin-top: 30px;
+        }
+
+        .warning h3 {
+            color: #936f00;
+            margin-bottom: 8px;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+
+            background: #032f36;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 50px 20px;
+
+            margin-top: 100px;
+        }
+
+        footer .footer-logo {
+
+            font-size: 28px;
+
+            font-weight: bold;
+
+            margin-bottom: 10px;
+        }
+
+        footer span {
+            color: #35d5d1;
+        }
+
+        footer p {
+            color: #b8d1d4;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 800px) {
+
+            nav {
+                padding: 15px 5%;
+            }
+
+            nav ul {
+                gap: 12px;
+            }
+
+            nav ul li a {
+                font-size: 13px;
+            }
+
+            .hero {
+                padding: 120px 8% 80px;
+            }
+
+            .hero h1 {
+                font-size: 45px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .stat {
+                border-right: none;
+                border-bottom: 1px solid #e5e7eb;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .tips {
+                grid-template-columns: 1fr;
+            }
+
+            .article {
+                padding: 28px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav>
+
+        <div class="logo">
+            🫁 Breath<span>Care</span>
+        </div>
+
+        <ul>
+
+            <li>
+                <a href="#home">Home</a>
+            </li>
+
+            <li>
+                <a href="#artikel">Artikel</a>
+            </li>
+
+            <li>
+                <a href="#tips">Tips</a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <div class="tag">
+                HEALTH • LIFESTYLE
+            </div>
+
+            <h1>
+                Bernapas Lebih
+                <span>Sehat.</span>
+            </h1>
+
+            <p>
+                Paru-paru adalah salah satu organ terpenting dalam tubuh.
+                Yuk, kenali cara menjaga kesehatan paru-paru dan membangun
+                kebiasaan hidup yang lebih sehat setiap hari.
+            </p>
+
+            <a href="#artikel" class="btn">
+                Jelajahi Artikel →
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= STATISTIK ================= -->
+
+    <section class="stats">
+
+        <div class="stat">
+
+            <h2>24/7</h2>
+
+            <p>
+                Sistem pernapasan bekerja setiap saat
+            </p>
+
+        </div>
+
+
+        <div class="stat">
+
+            <h2>🫁</h2>
+
+            <p>
+                Paru-paru membantu pertukaran gas
+            </p>
+
+        </div>
+
+
+        <div class="stat">
+
+            <h2>∞</h2>
+
+            <p>
+                Pentingnya menjaga kesehatan tubuh
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= ARTIKEL ================= -->
+
+    <section class="container" id="artikel">
+
+        <div class="section-title">
+
+            <h2>
+                Mengenal Kesehatan Paru-Paru
+            </h2>
+
+            <p>
+                Informasi sederhana untuk menjaga sistem pernapasan
+            </p>
+
+        </div>
+
+
+        <article class="article">
+
+            <h2>
+                Mengapa Kesehatan Paru-Paru Penting?
+            </h2>
+
+            <p>
+                Paru-paru merupakan organ utama dalam sistem pernapasan.
+                Organ ini membantu tubuh memperoleh oksigen dari udara dan
+                mengeluarkan karbon dioksida. Oksigen kemudian digunakan
+                tubuh untuk mendukung berbagai aktivitas dan fungsi tubuh.
+            </p>
+
+
+            <h3>
+                🚭 1. Hindari Rokok dan Asap Rokok
+            </h3>
+
+            <p>
+                Menghindari rokok merupakan salah satu kebiasaan penting
+                untuk menjaga kesehatan paru-paru. Asap rokok mengandung
+                berbagai zat yang dapat mengganggu sistem pernapasan.
+            </p>
+
+
+            <h3>
+                🏃 2. Tetap Aktif Bergerak
+            </h3>
+
+            <p>
+                Aktivitas fisik secara rutin dapat membantu menjaga
+                kebugaran tubuh dan mendukung kesehatan sistem pernapasan.
+                Pilih aktivitas yang sesuai dengan kondisi dan kemampuan
+                tubuh.
+            </p>
+
+
+            <h3>
+                🌱 3. Jaga Kualitas Udara
+            </h3>
+
+            <p>
+                Udara yang bersih penting bagi sistem pernapasan. Menjaga
+                kebersihan lingkungan dan mengurangi paparan debu atau
+                polusi dapat menjadi langkah yang baik.
+            </p>
+
+
+            <h3>
+                🥗 4. Konsumsi Makanan Bergizi
+            </h3>
+
+            <p>
+                Pola makan yang beragam dan bergizi membantu menjaga
+                kesehatan tubuh secara keseluruhan. Biasakan mengonsumsi
+                sayuran, buah-buahan, protein, dan makanan bergizi lainnya.
+            </p>
+
+        </article>
+
+    </section>
+
+
+    <!-- ================= CARDS ================= -->
+
+    <section class="container">
+
+        <div class="section-title">
+
+            <h2>
+                3 Kebiasaan Baik
+            </h2>
+
+            <p>
+                Mulai dari hal sederhana setiap hari
+            </p>
+
+        </div>
+
+
+        <div class="cards">
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    🚭
+                </div>
+
+                <h3>
+                    Bebas Asap Rokok
+                </h3>
+
+                <p>
+                    Hindari rokok dan asap rokok untuk membantu menjaga
+                    kesehatan sistem pernapasan.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    🏃
+                </div>
+
+                <h3>
+                    Aktif Bergerak
+                </h3>
+
+                <p>
+                    Lakukan aktivitas fisik secara rutin sesuai kemampuan
+                    untuk menjaga kebugaran tubuh.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    🌿
+                </div>
+
+                <h3>
+                    Udara Bersih
+                </h3>
+
+                <p>
+                    Jaga kebersihan lingkungan dan kurangi paparan polusi
+                    udara jika memungkinkan.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= TIPS ================= -->
+
+    <section class="container" id="tips">
+
+        <div class="tips">
+
+
+            <div class="tips-image">
+            </div>
+
+
+            <div class="tips-content">
+
+                <h2>
+                    🌿 Tips Menjaga Paru-Paru
+                </h2>
+
+                <ul>
+
+                    <li>
+                        Hindari merokok dan asap rokok.
+                    </li>
+
+                    <li>
+                        Lakukan aktivitas fisik secara teratur.
+                    </li>
+
+                    <li>
+                        Jaga kebersihan rumah dan lingkungan.
+                    </li>
+
+                    <li>
+                        Gunakan masker ketika berada di lingkungan
+                        berdebu atau berpolusi.
+                    </li>
+
+                    <li>
+                        Konsumsi makanan yang beragam dan bergizi.
+                    </li>
+
+                    <li>
+                        Istirahat dan tidur yang cukup.
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <!-- PERINGATAN -->
+
+        <div class="warning">
+
+            <h3>
+                ⚠️ Perhatikan Kondisi Pernapasan
+            </h3>
+
+            <p>
+                Jika mengalami sesak napas, batuk yang tidak kunjung
+                membaik, nyeri dada, atau keluhan pernapasan lainnya,
+                sebaiknya beri tahu orang tua atau wali dan mintalah
+                pemeriksaan dari tenaga kesehatan.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-logo">
+            🫁 Breath<span>Care</span>
+        </div>
+
+        <p>
+            Website edukasi tentang kesehatan paru-paru.
+        </p>
+
+        <p>
+            © 2026 BreathCare • HTML & CSS
+        </p>
+
+    </footer>
+
+
+</body>
+  </html>
